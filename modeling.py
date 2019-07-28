@@ -1,7 +1,7 @@
 import numpy as np
 import keras
 
-def prerpocessing(train_dir, val_dir, test_dir, size=224):
+def prerpocessing_train(train_dir, size=224):
     from keras.preprocessing.image import ImageDataGenerator
 
     train_data_gen = ImageDataGenerator(zoom_range= 0.1,
@@ -9,21 +9,23 @@ def prerpocessing(train_dir, val_dir, test_dir, size=224):
                                         height_shift_range= 10,
                                         rescale = 1/255
                                        )
-    data_gen = ImageDataGenerator(rescale=1/255)
 
     train_gen = train_data_gen.flow_from_directory(train_dir,
                                             target_size=(size,size),
                                             batch_size=100,
                                             class_mode='categorical')
+    return train_gen
+
+def prerpocessing_train_val(val_dir, size=224):
+    from keras.preprocessing.image import ImageDataGenerator
+
+    data_gen = ImageDataGenerator(rescale=1/255)
+
     val_gen = data_gen.flow_from_directory(val_dir,
                                             target_size=(size,size),
                                             batch_size=50,
                                             class_mode='categorical')
-    
-    test_gen = data_gen.flow_from_directory(test_dir,
-                                        target_size=(size,size),
-                                        batch_size=50,
-                                        class_mode='categorical')
+    return val_gen
     
 def VGG16_face(classes, size, hidden=512):
     from keras_vggface.vggface import VGGFace
@@ -82,3 +84,7 @@ def V3(classes, size=224):
     x = Flatten(name='flatten')(last_layer)
     out = Dense(classes, activation='softmax', name='classifier')(x)
     model = Model(model.input, out)
+
+    return model
+
+
