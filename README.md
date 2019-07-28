@@ -8,7 +8,7 @@ dlib이 현재 3.6버전까지만 지원한다고 하니 버전에 유의하시�
 ## 2. face detect & crop
 
 crop(predictor, name, from_dir, to_dir, rename=True) 의 형식으로 사용합니다.  
-predictor는 dlib에서 다운로드 받으실 수 있으며 git에도 올려두었습니다.  
+predictor는 dlib에서 다운로드 받으실 수 있습니다. [링크](https://github.com/davisking/dlib-models)
 
 위 명령어는 대상 디렉토리의 이름을 모두 <name>.<index>.jpg 형태로 만드는 작업을 자동으로 함께 지원해 줍니다.  
 rename = False로 함으로 이 작업을 중복으로 실행하는 것을 막을 수 있습니다.  
