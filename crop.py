@@ -5,7 +5,7 @@ import openface
 from skimage import io
 import os
 
-def crop(predictor, name, from_dir, to_dir):
+def crop(predictor, name, from_dir, to_dir, rename=True):
     face_detector = dlib.get_frontal_face_detector()
     predictor_model = predcitor
     face_marks = dlib.shape_predictor(predictor_model)
@@ -13,9 +13,10 @@ def crop(predictor, name, from_dir, to_dir):
     
     names = name
     path = to_dir
-    
-    for i, tar in enumerate(list(os.walk(from_dir))[0][2], start=1):
-        os.rename(from_dir+'/'+tar, from_dir + '/' + f'{names}.{i}.jpg')
+
+    if rename:
+        for i, tar in enumerate(list(os.walk(from_dir))[0][2], start=1):
+            os.path.join(from_dir+'/'+tar, from_dir + '/' + f'{names}.{i}.jpg')
         
     
     for i, name in enumerate(list(os.walk(from_dir))[0][2], start=1):
