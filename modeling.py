@@ -57,13 +57,13 @@ def VGGRES_face(classes, size=224):
     
     return model
 
-def VGGNES_face(classes, size=224):
+def VGGNSE_face(classes, size=224):
     from keras_vggface.vggface import VGGFace
     from keras.engine import  Model
     from keras.layers import Flatten, Dense, Input
     from keras_vggface.vggface import VGGFace
     
-    vgg_model = VGGFace(model='nesnet50', include_top=False, input_shape=(size, size, 3))
+    vgg_model = VGGFace(model='senet50', include_top=False, input_shape=(size, size, 3))
     last_layer = vgg_model.get_layer('avg_pool').output
     x = Flatten(name='flatten')(last_layer)
     out = Dense(classes, activation='softmax', name='classifier')(x)

@@ -22,6 +22,6 @@ def test(model, predictor, img):
     
     im = np.reshape(alignedFace, (1,224,224,3))/255
     
-    result = model.predict(im)
+    result = list(train_gen.class_indices.keys())[np.argmax(model.predict(im))]
     
     return result
